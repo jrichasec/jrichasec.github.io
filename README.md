@@ -1,1 +1,0 @@
-# jrichasec.github.io
