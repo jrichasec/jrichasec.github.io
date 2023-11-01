@@ -27,7 +27,7 @@ github_username:  jekyll
 # Build settings
 markdown: kramdown
 theme: plainwhite
-#theme: minima
+remote_theme: samarsault/plainwhite-jekyll
 plugins:
   - jekyll-feed
 
