@@ -8,7 +8,7 @@ Apple stopped encrypting the kernelcache in iOS 10, however, the kernelcache is 
 
 The kernelcache resides within the .ipsw.  Rename the .ipsw to a .zip file and extract it.
 
-```bash
+```sh
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ unzip ipsw.zip 
 Archive:  ipsw.zip
  extracting: 078-33721-080.dmg       
@@ -19,7 +19,7 @@ Archive:  ipsw.zip
 
 There may be two kernelcache files extracted from the .ipsw:
 
-```bash
+```sh
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ find . | grep kernelcache
 ./kernelcache.release.iphone9
 ./kernelcache.release.iphone10
@@ -27,7 +27,7 @@ jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ find . | grep kernelcache
 
 In this example I'll be using the ./kernelcache.release.iphone10 file as that algins with kernel running on the device:
 
-```bash
+```sh
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ ssh mobile@192.168.68.104 uname -a 
 Darwin Jacks-iPhone 21.6.0 Darwin Kernel Version 21.6.0: Wed Aug 10 15:38:24 PDT 2022; root:xnu-8020.142.2~1/RELEASE_ARM64_T8015 iPhone10,1 arm Darwin
 ```
@@ -36,7 +36,7 @@ Darwin Jacks-iPhone 21.6.0 Darwin Kernel Version 21.6.0: Wed Aug 10 15:38:24 PDT
 
 On initial analysis with off-the-shelf tools like "file" and "binwalk", there are no magic bytes found.
 
-```bash
+```sh
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ file kernelcache.release.iphone10
 kernelcache.release.iphone10: data
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ binwalk kernelcache.release.iphone10
@@ -49,7 +49,7 @@ jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$
 
 When we manually take a look at the header structure using xxd, the following can be observed;
 
-```bash
+```sh
 jack@jack-NUC8i3BEH:~/Downloads/ipsw-unzip$ xxd kernelcache.release.iphone10  | head -10
 00000000: 3083 ec39 c416 0449 4d34 5016 046b 726e  0..9...IM4P..krn
 00000010: 6c16 254b 6572 6e65 6c43 6163 6865 4275  l.%KernelCacheBu
